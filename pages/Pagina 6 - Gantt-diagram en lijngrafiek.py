@@ -53,14 +53,14 @@ for i in range(len(omloopplanning)):
         omloopplanning['starttijd'][i] = omloopplanning['starttijd'].apply(lambda x: x.replace(year=2023, month=2, day=25))[i]
 st.write('5')    
 
-chart_data = omloopplanning
-with chart_container(chart_data):
-    st.write(
-        "I can use a subset of the data for my chart... "
-        "but still give all the necessary context in "
-        "`chart_container`!"
-    )
-    st.area_chart(chart_data[omloopplanning["starttijd"], omloopplanning["stroomgebruik"]])
+#chart_data = omloopplanning
+#with chart_container(chart_data):
+#    st.write(
+#        "I can use a subset of the data for my chart... "
+#        "but still give all the necessary context in "
+#        "`chart_container`!"
+#    )
+#    st.area_chart(chart_data[omloopplanning["starttijd"], omloopplanning["stroomgebruik"]])
     
 st.write('6')  
 
