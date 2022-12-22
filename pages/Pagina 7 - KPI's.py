@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -- coding: utf-8 --
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -43,9 +43,25 @@ if st.session_state.omloopplanning and st.session_state.datafile:
 
 
 #########################################################################################
-
+    with col1: 
+        oplaadsnelheid = 20
+        kosten_opladen = 0.37
+        max_capacity_battery = st.session_state.maximumcapaciteit * st.session_state.SOH_waarde
     
+        kosten_bijladen = 0  # NIEUW
 
+        for i in st.session_state.laatste_accucapaciteit:
+            ii = i/100*max_capacity_battery
+            if ii < max_capacity_battery:
+                kosten_bijladen += (max_capacity_battery - ii)/oplaadsnelheid * kosten_opladen
+        st.subheader('kosten voor het opladen in de gemaakte planning:')
+        st.subheader(f'€{int(st.session_state.totaal_kosten_opladen)}')
+    
+    with col2:
+        st.subheader('kosten voor het extra bijladen aan het einde van de planning (terug naar de start waarde)')
+        st.subheader(f'€{int(kosten_bijladen)}')
+        
+        
 ##################################################################################
     terug_aan_net = 0
 
@@ -55,4 +71,4 @@ if st.session_state.omloopplanning and st.session_state.datafile:
     
     if terug_aan_net > 0:
         st.subheader('Hoeveel Kwh kan er aan het einde van de dag worden terug gegeven aan het net:')
-        st.header(f'{terug_aan_net} kWh') 
+        st.header(f'{terug_aan_net} kWh')
