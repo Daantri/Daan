@@ -247,12 +247,12 @@ if st.session_state.omloopplanning and st.session_state.datafile:
                 min_reistijd = c.loc[(df3.startlocatie == df2.startlocatie[i]) & (df3.eindlocatie == df2.eindlocatie[i]) & (df3.buslijn == df2.buslijn[i]) | (df3.buslijn == " ")].values[0]
                 if aantal_minuten < min_reistijd:
                     counter4 += 1
-                    bus_die_te_snel_rijdt.append(df2['omloop nummer'])
+                    bus_die_te_snel_rijdt.append(df2['omloop nummer'][i])
             else:     
                 min_reistijd = c.loc[(df3.startlocatie == df2.startlocatie[i]) & (df3.eindlocatie == df2.eindlocatie[i]) & (df3.buslijn == int(df2.buslijn[i]))].values[0]
                 if aantal_minuten < min_reistijd:
                     counter4 += 1
-                    bus_die_te_snel_rijdt.append(df2['omloop nummer'])
+                    bus_die_te_snel_rijdt.append(df2['omloop nummer'][i])
                 
     st.markdown(counter4)
     st.session_state.bus_die_te_snel_rijdt = bus_die_te_snel_rijdt
@@ -303,9 +303,17 @@ if st.session_state.omloopplanning and st.session_state.datafile:
             aantal_minuten = ((eindomgezet-beginomgezet).seconds)/60
             aantal_minuten = int(aantal_minuten)
             c = df3['max reistijd in min'].astype(int)
-            min_reistijd = c.loc[(df3.startlocatie == df2.startlocatie[i]) & (df3.eindlocatie == df2.eindlocatie[i]) & (df3.buslijn == df2.buslijn[i])].values[0]
-            if aantal_minuten > min_reistijd:
-                counter7 += 1
+            if (df2.buslijn[i] == 'leeg') == True or (df2.buslijn[i] == " ") == True:
+                max_reistijd = c.loc[(df3.startlocatie == df2.startlocatie[i]) & (df3.eindlocatie == df2.eindlocatie[i]) & (df3.buslijn == df2.buslijn[i]) | (df3.buslijn == " ")].values[0]
+                if aantal_minuten > max_reistijd:
+                    counter7 += 1
+                    bus_die_te_langzaam_rijdt.append(df2['omloop nummer'][i])
+            else:     
+                max_reistijd = c.loc[(df3.startlocatie == df2.startlocatie[i]) & (df3.eindlocatie == df2.eindlocatie[i]) & (df3.buslijn == int(df2.buslijn[i]))].values[0]
+                if aantal_minuten > max_reistijd:
+                    counter7 += 1
+                    bus_die_te_langzaam_rijdt.append(df2['omloop nummer'][i])
+                
     st.markdown(counter7)
     st.session_state.bus_die_te_langzaam_rijdt = bus_die_te_langzaam_rijdt
     st.session_state.counter7 = counter7
