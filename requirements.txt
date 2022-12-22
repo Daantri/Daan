@@ -54,7 +54,7 @@ pandas
 pandocfilters
 parso
 pexpect
-pickle
+pickle-mixin
 pickleshare
 Pillow
 plotly.express
