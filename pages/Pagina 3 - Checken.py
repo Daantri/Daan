@@ -190,9 +190,9 @@ if st.session_state.omloopplanning and st.session_state.datafile:
                         wenscount1 += 1
                 test4['stroomgebruik'][m] = start_capaciteit
                 lijst2.append(start_capaciteit/max_capacity_battery*100)
-        
+        st.session_state.test = test4
         start_percentage.append(lijst2)
-    st.session_state.test = test4
+   
     st.markdown(start_percentage)
     st.session_state.lijn_boven_capaciteit = lijn_boven_capaciteit
     st.session_state.lijn_onder_capaciteit = lijn_onder_capaciteit
