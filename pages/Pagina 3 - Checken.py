@@ -245,7 +245,7 @@ if st.session_state.omloopplanning and st.session_state.datafile:
             aantal_minuten = int(aantal_minuten)
             c = df3['min reistijd in min'].astype(int)
             st.write(df2.startlocatie[i], df2.eindlocatie[i], df2.buslijn[i])
-            min_reistijd = c.loc[(df3.startlocatie == df2.startlocatie[i]) & (df3.eindlocatie == df2.eindlocatie[i]) & (df3.buslijn == df2.buslijn[i])].values[0]
+            min_reistijd = c.loc[(df3.startlocatie == df2.startlocatie[i]) & (df3.eindlocatie == df2.eindlocatie[i]) & (df3.buslijn == int(df2.buslijn[i]))].values[0]
             if aantal_minuten < min_reistijd:
                 counter4 += 1
                 bus_die_te_snel_rijdt.append(df2['omloop nummer'])
