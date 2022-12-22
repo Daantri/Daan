@@ -232,7 +232,7 @@ if st.session_state.omloopplanning and st.session_state.datafile:
     
     df2.fillna('leeg', inplace=True)
     df3.fillna('leeg', inplace=True)
-    
+    df2.loc[df2['buslijn'] == " ", 'buslijn'] = 'leeg'
     st.header('Eis 4')
     counter4 = 0
     bus_die_te_snel_rijdt = []
