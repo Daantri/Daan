@@ -19,8 +19,6 @@ if st.session_state.omloopplanning and st.session_state.datafile:
     df1 = pd.read_excel(st.session_state.datafile, engine='openpyxl')
     df2 = pd.read_excel(st.session_state.omloopplanning, engine='openpyxl')
     df3 = pd.read_excel(st.session_state.datafile,sheet_name='Afstand matrix') #deze moet aangepast
-    col_list = df2["buslijn"].values.tolist()
-    st.write(col_list)
 #Er moet een bus rijden op de momenten die vastgelegd zijn in de dienstregeling
     st.header('Eis 1' )
     st.subheader('Er moet een bus rijden op de momenten die vastgelegd zijn in de dienstregeling')
@@ -245,7 +243,6 @@ if st.session_state.omloopplanning and st.session_state.datafile:
             aantal_minuten = ((eindomgezet-beginomgezet).seconds)/60
             aantal_minuten = int(aantal_minuten)
             c = df3['min reistijd in min'].astype(int)
-            st.write(df2.startlocatie[i], df2.eindlocatie[i], df2.buslijn[i])
             if (df2.buslijn[i] == 'leeg') == True or (df2.buslijn[i] == " ") == True:
                 min_reistijd = c.loc[(df3.startlocatie == df2.startlocatie[i]) & (df3.eindlocatie == df2.eindlocatie[i]) & (df3.buslijn == df2.buslijn[i]) | (df3.buslijn == " ")].values[0]
                 if aantal_minuten < min_reistijd:
