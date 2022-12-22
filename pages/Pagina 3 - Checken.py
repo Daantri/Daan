@@ -33,13 +33,13 @@ if st.session_state.omloopplanning and st.session_state.datafile:
                 counter_1 += 1
                 
             
-    if counter_1 == lengte_df1:
+#    if counter_1 == lengte_df1:
         #st.markdown('alle riten die gereden moeten worden, worden gereden')
-    elif counter_1 > lengte_df1:
-        minder = counter_1 - lengte_df1
+#    elif counter_1 > lengte_df1:
+#        minder = counter_1 - lengte_df1
         # st.markdown('de volgende ritten worden niet gereden:')
-    else:
-        meer = lengte_df1 - counter_1
+#    else:
+#        meer = lengte_df1 - counter_1
         # st.markdown('de volgende ritten worden te veel gereden:')
 
     counter1 = abs(lengte_df1-counter_1)
