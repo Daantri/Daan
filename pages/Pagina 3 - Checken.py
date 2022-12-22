@@ -49,12 +49,12 @@ if st.session_state.omloopplanning and st.session_state.datafile:
     # st.subheader('Als een bus ergens eindigt, start de bus hier weer op het moment dat hij weer gaat rijden')
 #Als een bus ergens eindigt, start de bus hier weer op het moment dat hij weer gaat rijden
     counter2 = 0
-    verkeerde_ritten = []
+    verkeerde_ritten = list()
     for k in range(len(df2['startlocatie'])-1):
         j = k + 1
         if df2['startlocatie'][j] != df2['eindlocatie'][k]:
             counter2 += 1
-            verkeerde_ritten.append((df2['startlocatie'], df2['eindlocatie'][k], df2['omloop nummer'][j]))
+            verkeerde_ritten.append(df2['omloop nummer'][j])
 
     st.session_state.verkeerde_ritten = verkeerde_ritten
     # st.write(st.session_state.verkeerde_ritten)
@@ -280,7 +280,11 @@ if st.session_state.omloopplanning and st.session_state.datafile:
     #Tellen hoevaak er niet op de gekozen locatie opgeladen wordt
     counter5 = 0
     a = df2.loc[(df2.activiteit == 'opladen') & (df2.startlocatie != st.session_state.garagenaam) & (df2.eindlocatie != st.session_state.garagenaam)]#ehvgar moet worden verandered naar user input
+    
     counter5 += len(a)
+    st.session_state.bussendienietopladenoplocatie = []
+    if len(a) != 0:
+        st.session_state.bussendienietopladenoplocatie = a['omloop nummer'].tolist()
     st.session_state.counter5 = counter5
     
     # st.header('Eis 6')
