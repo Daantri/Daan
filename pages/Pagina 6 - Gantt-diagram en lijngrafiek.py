@@ -62,11 +62,12 @@ with chart_container(chart_data):
     )
     st.area_chart(chart_data[omloopplanning["starttijd"], omloopplanning["stroomgebruik"]])
     
-
+st.write('6')  
 
 fig = px.timeline(omloopplanning, x_start="starttijd", x_end="eindtijd", y="omloop nummer", color="activiteit")
 fig.update_yaxes(autorange="reversed")
 st.plotly_chart(fig)
+st.write('7')  
 #st.dataframe(omloopplanning)
 st.header('Verloop accucapaciteit (in kWh)')
 fig2 = px.line(omloopplanning, x="starttijd", y="stroomgebruik", color='omloop nummer')
