@@ -126,7 +126,8 @@ if st.session_state.omloopplanning and st.session_state.datafile:
 
 
 #De accucapaciteit van de bus is minimaal 10% en word niet meer opgeladen dan 90%
-    df2['stroomgebruik'] = ""   
+    test4 = df2
+    test4['stroomgebruik'] = ""   
     leegloopsnelheid = 2.2
     idle_leegloopsnelheid = 0.01
     oplaadsnelheid = 20
@@ -187,11 +188,11 @@ if st.session_state.omloopplanning and st.session_state.datafile:
                     if df2['omloop nummer'][l] not in lijn_boven_capaciteit:
                         lijn_boven_capaciteit.append(df2['omloop nummer'][l])
                         wenscount1 += 1
-                df2['stroomgebruik'][m] = start_capaciteit
+                test4['stroomgebruik'][m] = start_capaciteit
                 lijst2.append(start_capaciteit/max_capacity_battery*100)
         
         start_percentage.append(lijst2)
-    st.session_state.test = df2
+    st.session_state.test = test4
     st.markdown(start_percentage)
     st.session_state.lijn_boven_capaciteit = lijn_boven_capaciteit
     st.session_state.lijn_onder_capaciteit = lijn_onder_capaciteit
