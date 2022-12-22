@@ -12,16 +12,19 @@ from streamlit_extras.switch_page_button import switch_page
 st.set_page_config(
     page_title= 'Checken')
 
-st.title('Eisen')
+st.title('Checken eisen en wensen')
+st.write('De eisen en wensen worden momenteel gecontroleerd. Heeft u alstublieft even geduld.')
+st.write('Zodra het \'Running\' icoon rechtsboven verdwenen is, kunt u verder naar de volgende pagina.')
 
 if st.session_state.omloopplanning and st.session_state.datafile:
     st.markdown('---')
     df1 = pd.read_excel(st.session_state.datafile, engine='openpyxl')
     df2 = pd.read_excel(st.session_state.omloopplanning, engine='openpyxl')
     df3 = pd.read_excel(st.session_state.datafile,sheet_name='Afstand matrix') #deze moet aangepast
+
 #Er moet een bus rijden op de momenten die vastgelegd zijn in de dienstregeling
-    st.header('Eis 1' )
-    st.subheader('Er moet een bus rijden op de momenten die vastgelegd zijn in de dienstregeling')
+    # st.header('Eis 1' )
+    # st.subheader('Er moet een bus rijden op de momenten die vastgelegd zijn in de dienstregeling')
     counter_1 = 0
     lengte_df1 = len(df1['startlocatie'])
     for i in range(len(df2['startlocatie'])):
@@ -34,16 +37,16 @@ if st.session_state.omloopplanning and st.session_state.datafile:
         st.markdown('alle riten die gereden moeten worden, worden gereden')
     elif counter_1 > lengte_df1:
         minder = counter_1 - lengte_df1
-        st.markdown('de volgende ritten worden niet gereden:')
+        # st.markdown('de volgende ritten worden niet gereden:')
     else:
         meer = lengte_df1 - counter_1
-        st.markdown('de volgende ritten worden te veel gereden:')
+        # st.markdown('de volgende ritten worden te veel gereden:')
 
     counter1 = abs(lengte_df1-counter_1)
     st.session_state.counter1 = counter1
 
-    st.header('Eis 2')
-    st.subheader('Als een bus ergens eindigt, start de bus hier weer op het moment dat hij weer gaat rijden')
+    # st.header('Eis 2')
+    # st.subheader('Als een bus ergens eindigt, start de bus hier weer op het moment dat hij weer gaat rijden')
 #Als een bus ergens eindigt, start de bus hier weer op het moment dat hij weer gaat rijden
     counter2 = 0
     verkeerde_ritten = []
@@ -56,14 +59,14 @@ if st.session_state.omloopplanning and st.session_state.datafile:
     st.session_state.verkeerde_ritten = verkeerde_ritten
     # st.write(st.session_state.verkeerde_ritten)
             
-    if counter2 <= 0:
-        st.markdown('alle bussen beginnen met rijden waar ze eindigen (van --> naar):')
-    else:
-        st.markdown('de volgende ritten beginnen niet waar ze eindigen (van --> naar):')
-        st.markdown(st.session_state.verkeerde_ritten)
+    # if counter2 <= 0:
+    #     st.markdown('alle bussen beginnen met rijden waar ze eindigen (van --> naar):')
+    # else:
+    #     st.markdown('de volgende ritten beginnen niet waar ze eindigen (van --> naar):')
+    #     st.markdown(st.session_state.verkeerde_ritten)
 
     
-    st.markdown('De accucapaciteit van de bus is minimaal 10% en word niet meer opgeladen dan 90%')
+    # st.markdown('De accucapaciteit van de bus is minimaal 10% en word niet meer opgeladen dan 90%')
     st.session_state.counter2 = counter2
 
 
@@ -125,8 +128,7 @@ if st.session_state.omloopplanning and st.session_state.datafile:
 
 
 #De accucapaciteit van de bus is minimaal 10% en word niet meer opgeladen dan 90%
-    test4 = df2
-    test4['stroomgebruik'] = ""   
+    df2['stroomgebruik'] = ""   
     leegloopsnelheid = 2.2
     idle_leegloopsnelheid = 0.01
     oplaadsnelheid = 20
@@ -187,17 +189,16 @@ if st.session_state.omloopplanning and st.session_state.datafile:
                     if df2['omloop nummer'][l] not in lijn_boven_capaciteit:
                         lijn_boven_capaciteit.append(df2['omloop nummer'][l])
                         wenscount1 += 1
-                test4['stroomgebruik'][m] = start_capaciteit
+                df2['stroomgebruik'][m] = start_capaciteit
                 lijst2.append(start_capaciteit/max_capacity_battery*100)
-        st.session_state.test = test4
+        st.session_state.test = df2
         start_percentage.append(lijst2)
-   
-    st.markdown(start_percentage)
+    # st.markdown(start_percentage)
     st.session_state.lijn_boven_capaciteit = lijn_boven_capaciteit
     st.session_state.lijn_onder_capaciteit = lijn_onder_capaciteit
-    st.header('Eis 3')
-    st.subheader('Deze omloop ritten komen onder de 10% van de max capaciteit:')
-    st.markdown(st.session_state.lijn_onder_capaciteit)
+    # st.header('Eis 3')
+    # st.subheader('Deze omloop ritten komen onder de 10% van de max capaciteit:')
+    # st.markdown(st.session_state.lijn_onder_capaciteit)
     st.session_state.counter3 = counter3
     
     
@@ -231,7 +232,7 @@ if st.session_state.omloopplanning and st.session_state.datafile:
     df2.fillna('leeg', inplace=True)
     df3.fillna('leeg', inplace=True)
     df2.loc[df2['buslijn'] == " ", 'buslijn'] = 'leeg'
-    st.header('Eis 4')
+    # st.header('Eis 4')
     counter4 = 0
     bus_die_te_snel_rijdt = []
     for i in range(len(df2)):
@@ -254,21 +255,21 @@ if st.session_state.omloopplanning and st.session_state.datafile:
                     counter4 += 1
                     bus_die_te_snel_rijdt.append(df2['omloop nummer'][i])
                 
-    st.markdown(counter4)
+    # st.markdown(counter4)
     st.session_state.bus_die_te_snel_rijdt = bus_die_te_snel_rijdt
     st.session_state.counter4 = counter4
     if counter4 > 0:
         st.write('Bus(sen) ', bus_die_te_snel_rijdt, 'rijden te snel naar een route.')
 
 
-    st.header('Eis 5' )
+    # st.header('Eis 5' )
     #Tellen hoevaak er niet op de gekozen locatie opgeladen wordt
     counter5 = 0
     a = df2.loc[(df2.activiteit == 'opladen') & (df2.startlocatie != st.session_state.garagenaam) & (df2.eindlocatie != st.session_state.garagenaam)]#ehvgar moet worden verandered naar user input
     counter5 += len(a)
     st.session_state.counter5 = counter5
     
-    st.header('Eis 6')
+    # st.header('Eis 6')
     #Er worden maximaal 20 bussen tegelijk opgeladen
     counter6 = 0
     if df2['omloop nummer'].nunique() > st.session_state.tegelijk_opladen:
@@ -291,7 +292,7 @@ if st.session_state.omloopplanning and st.session_state.datafile:
     st.session_state.counter6 = counter6
 
     
-    st.header('Eis 7' )
+    # st.header('Eis 7' )
     counter7 = 0
     bus_die_te_langzaam_rijdt = []
     for i in range(len(df2)):
@@ -313,21 +314,20 @@ if st.session_state.omloopplanning and st.session_state.datafile:
                 if aantal_minuten > max_reistijd:
                     counter7 += 1
                     bus_die_te_langzaam_rijdt.append(df2['omloop nummer'][i])
-                
-    st.markdown(counter7)
+    # st.markdown(counter7)
     st.session_state.bus_die_te_langzaam_rijdt = bus_die_te_langzaam_rijdt
     st.session_state.counter7 = counter7
-    if counter7 > 0:
-        st.write('Bus(sen) ', bus_die_te_langzaam_rijdt, 'rijden te langzaam naar een route.')
+    # if counter7 > 0:
+    #     st.write('Bus(sen) ', bus_die_te_langzaam_rijdt, 'rijden te langzaam naar een route.')
 
 ###### WENSEN
-    st.header('Wens 1')
-    st.subheader('Deze omloop ritten komen boven de 90% van de max capaciteit:')
-    st.markdown(st.session_state.lijn_boven_capaciteit)
+    # st.header('Wens 1')
+    # st.subheader('Deze omloop ritten komen boven de 90% van de max capaciteit:')
+    # st.markdown(st.session_state.lijn_boven_capaciteit)
     st.session_state.wenscount1 = wenscount1*st.session_state.waarde_wens1
     
     
-    st.header('Wens 2' )
+    # st.header('Wens 2' )
     wenscount2 = 0
     minimale_oplaadtijd = st.session_state.minimale_oplaadtijd
     bussen_die_te_kort_opladen = []
@@ -341,16 +341,16 @@ if st.session_state.omloopplanning and st.session_state.datafile:
             aantal_minuten = int(aantal_minuten)    
         if aantal_minuten < st.session_state.minimale_oplaadtijd:
             wenscount2 += 1
-    st.markdown(wenscount2)
+    # st.markdown(wenscount2)
     st.session_state.bussen_die_te_kort_opladen = bussen_die_te_kort_opladen
     st.session_state.wenscount2 = wenscount2
-    if wenscount2 > 0:
-        st.write('Bus(sen) ', bussen_die_te_kort_opladen, 'laden te weinig minuten op')
+    # if wenscount2 > 0:
+    #     st.write('Bus(sen) ', bussen_die_te_kort_opladen, 'laden te weinig minuten op')
 
-    st.header('Wens 3')
+    # st.header('Wens 3')
     st.session_state.wenscount3 = sum(df2.activiteit == 'materiaal rit')
     
-    st.header('Wens 4')
+    # st.header('Wens 4')
     st.session_state.wenscount4 = (df2['omloop nummer'].nunique())
     
 pagina_4 = st.button("Volgende pagina")
