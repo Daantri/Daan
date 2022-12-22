@@ -34,7 +34,7 @@ if st.session_state.omloopplanning and st.session_state.datafile:
                 
             
     if counter_1 == lengte_df1:
-        st.markdown('alle riten die gereden moeten worden, worden gereden')
+        #st.markdown('alle riten die gereden moeten worden, worden gereden')
     elif counter_1 > lengte_df1:
         minder = counter_1 - lengte_df1
         # st.markdown('de volgende ritten worden niet gereden:')
@@ -197,12 +197,12 @@ if st.session_state.omloopplanning and st.session_state.datafile:
         
         start_percentage.append(lijst2)
     st.session_state.test = df2
-    st.markdown(start_percentage)
+    #st.markdown(start_percentage)
     st.session_state.lijn_boven_capaciteit = lijn_boven_capaciteit
     st.session_state.lijn_onder_capaciteit = lijn_onder_capaciteit
-    st.header('Eis 3')
-    st.subheader('Deze omloop ritten komen onder de 10% van de max capaciteit:')
-    st.markdown(st.session_state.lijn_onder_capaciteit)
+    #st.header('Eis 3')
+    #st.subheader('Deze omloop ritten komen onder de 10% van de max capaciteit:')
+    #st.markdown(st.session_state.lijn_onder_capaciteit)
     st.session_state.counter3 = counter3
     
     
