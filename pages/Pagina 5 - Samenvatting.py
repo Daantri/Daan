@@ -37,4 +37,4 @@ st.dataframe({
                           st.session_state.bussen_die_te_kort_opladen]})
 pagina_6 = st.button("Volgende pagina")
 if pagina_6:
-    switch_page("Pagina 6 - Gantt-diagram en lijngrafiek")
+    switch_page("Pagina 6 - Gantt-diagram en lijngrafiek") 
