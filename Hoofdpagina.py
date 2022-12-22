@@ -11,7 +11,7 @@ import numpy as np
 import pickle as pkle
 import os.path
 from datetime import datetime, timedelta
-import streamlit_extras
+from streamlit_extras.switch_page_button import switch_page
 
 
 
