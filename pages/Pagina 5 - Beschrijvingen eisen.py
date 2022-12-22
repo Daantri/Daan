@@ -6,38 +6,35 @@ import datetime
 import matplotlib.pyplot as plt
 import altair as alt
 import numpy as np
+from streamlit_extras.switch_page_button import switch_page
 
-st.subheader('Beschrijving van de Eisen')
+st.set_page_config(
+    page_title= 'Samenvatting')
+st.title('Samenvatting')
+# st.dataframe({
+#         "omloop nummer van de bus < 10% ": [lijn_onder_capaciteit],
+#         "omloop nummer van de bus > 90%": [lijn_boven_capaciteit],})
 
-if st.session_state.counter1 > 0:
-    st.markdown('beschrijving Eis 1')
-    st.text_area('Eis 1', '''Eis 1 was gemaakt om te checken of er inderdaad 
-    een bus rijdt op de momenten die vastgelegd zijn in de 
-    dienstregeling.
-    De rede dat er niet aan Eis 1 wordt voldaan is omdat er ............''')
-    
-if st.session_state.counter2 > 0:
-    st.markdown('beschrijving Eis 2')
-    st.text_area('Eis 2', '''.....................''')
-    
-    
-if st.session_state.counter3 > 0:
-    st.markdown('beschrijving Eis 3')
-    st.text_area('Eis 3', '''.....................''')
-    
-if st.session_state.counter4 > 0:
-    st.markdown('beschrijving Eis 4')
-    st.text_area('Eis 4', '''.....................''')
-    
-if st.session_state.counter5 > 0:
-    st.markdown('beschrijving Eis 5')
-    st.text_area('Eis 5', '''.....................''')
-
-if st.session_state.counter6 > 0:
-    st.markdown('beschrijving Eis 6')
-    st.text_area('Eis 6', '''.....................''')
-    
-if st.session_state.counter7 > 0:
-    st.markdown('beschrijving Eis 7')
-    st.text_area('Eis 7', '''.....................''')
-
+#st.checkbox("Use container width", value=False, key="use_container_width")
+st.dataframe({
+        "Eisen": ['Eis 1:Bussen die niet rijden op de momenten die vastgelegd zijn',
+                  'Eis 2: Bussen beginnen niet waar ze eindigen', 
+                  'Eis 3: Bussen met een accucapaciteit <10%', 
+                  'Eis 4: Bussen met een accucapaciteit >90%',
+                  'Eis 5 Bussen die niet op de gekozen locatie opgeladen worden',
+                  'Eis 6: ',
+                  'Eis 7: ',
+                  'Eis 8:',
+                  'Eis 9:'],
+        "Omloop nummer": ['in te vullen eis 1*******',
+                            st.session_state.verkeerde_ritten,
+                          st.session_state.lijn_onder_capaciteit,
+                          st.session_state.lijn_boven_capaciteit,
+                          'in te vullen eis 5*******',
+                          'in te vullen eis 6*******',
+                          st.session_state.bus_die_te_snel_rijdt,
+                          st.session_state.bus_die_te_langzaam_rijdt,
+                          st.session_state.bussen_die_te_kort_opladen]})
+pagina_6 = st.button("Volgende pagina")
+if pagina_6:
+    switch_page("Pagina 6 - Gantt-diagram en lijngrafiek")
