@@ -39,7 +39,7 @@ for i in range(len(omloopplanning)):
         if not omloopplanning["activiteit"][i] == 'opladen':
             if not omloopplanning["activiteit"][i] == 'idle':
                 omloopplanning["activiteit"][i] = 'Buslijn ' + str(int(omloopplanning["activiteit"][i]))
-             
+                
 for i in range(len(omloopplanning)):
     if (str(omloopplanning['eindtijd'][i])[11:13]) < '03':
         omloopplanning['eindtijd'][i] = omloopplanning['eindtijd'].apply(lambda x: x.replace(year=2023, month=2, day=26))[i]
@@ -51,23 +51,13 @@ for i in range(len(omloopplanning)):
         omloopplanning['starttijd'][i] = omloopplanning['starttijd'].apply(lambda x: x.replace(year=2023, month=2, day=26))[i]
     else:
         omloopplanning['starttijd'][i] = omloopplanning['starttijd'].apply(lambda x: x.replace(year=2023, month=2, day=25))[i]
-   
 
-#chart_data = omloopplanning
-#with chart_container(chart_data):
-#    st.write(
-#        "I can use a subset of the data for my chart... "
-#        "but still give all the necessary context in "
-#        "`chart_container`!"
-#    )
-#    st.area_chart(chart_data[omloopplanning["starttijd"], omloopplanning["stroomgebruik"]])
-    
- 
+
+
 
 fig = px.timeline(omloopplanning, x_start="starttijd", x_end="eindtijd", y="omloop nummer", color="activiteit")
 fig.update_yaxes(autorange="reversed")
 st.plotly_chart(fig)
-st.write('7')  
 #st.dataframe(omloopplanning)
 st.header('Verloop accucapaciteit (in kWh)')
 fig2 = px.line(omloopplanning, x="starttijd", y="stroomgebruik", color='omloop nummer')
