@@ -131,7 +131,7 @@ if st.session_state.omloopplanning and st.session_state.datafile:
     leegloopsnelheid = 2.2
     idle_leegloopsnelheid = 0.01
     oplaadsnelheid = 20
-    max_capacity_battery = st.session_state.maximumcapaciteit
+    max_capacity_battery = st.session_state.maximumcapaciteit * st.session_state.SOH_waarde
     
     lijn_onder_capaciteit = []
     lijn_boven_capaciteit = []
@@ -244,6 +244,7 @@ if st.session_state.omloopplanning and st.session_state.datafile:
             aantal_minuten = ((eindomgezet-beginomgezet).seconds)/60
             aantal_minuten = int(aantal_minuten)
             c = df3['min reistijd in min'].astype(int)
+            st.write(df2.startlocatie[i], df2.eindlocatie[i], df2.buslijn[i])
             min_reistijd = c.loc[(df3.startlocatie == df2.startlocatie[i]) & (df3.eindlocatie == df2.eindlocatie[i]) & (df3.buslijn == df2.buslijn[i])].values[0]
             if aantal_minuten < min_reistijd:
                 counter4 += 1
