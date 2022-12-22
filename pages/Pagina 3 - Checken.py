@@ -188,7 +188,7 @@ if st.session_state.omloopplanning and st.session_state.datafile:
                     if df2['omloop nummer'][l] not in lijn_boven_capaciteit:
                         lijn_boven_capaciteit.append(df2['omloop nummer'][l])
                         wenscount1 += 1
-                test4['stroomgebruik'][m] = start_capaciteit
+                test4['stroomgebruik'][m+1] = start_capaciteit
                 lijst2.append(start_capaciteit/max_capacity_battery*100)
         st.session_state.test = test4
         start_percentage.append(lijst2)
