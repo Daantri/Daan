@@ -19,7 +19,8 @@ if st.session_state.omloopplanning and st.session_state.datafile:
     df1 = pd.read_excel(st.session_state.datafile, engine='openpyxl')
     df2 = pd.read_excel(st.session_state.omloopplanning, engine='openpyxl')
     df3 = pd.read_excel(st.session_state.datafile,sheet_name='Afstand matrix') #deze moet aangepast
-
+    col_list = df2["buslijn"].values.tolist()
+    st.write(col_list)
 #Er moet een bus rijden op de momenten die vastgelegd zijn in de dienstregeling
     st.header('Eis 1' )
     st.subheader('Er moet een bus rijden op de momenten die vastgelegd zijn in de dienstregeling')
