@@ -48,3 +48,4 @@ with st.form("Waarde toekennen aan wens 4"):
 pagina_3 = st.button("Volgende pagina")
 if pagina_3:
     switch_page("Pagina 3 - Checken")
+ 
