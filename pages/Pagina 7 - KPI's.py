@@ -55,4 +55,4 @@ if st.session_state.omloopplanning and st.session_state.datafile:
     
     if terug_aan_net > 0:
         st.subheader('Hoeveel Kwh kan er aan het einde van de dag worden terug gegeven aan het net:')
-        st.header(f'{terug_aan_net} kWh')
+        st.header(f'{terug_aan_net} kWh') 
