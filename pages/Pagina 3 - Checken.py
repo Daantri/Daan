@@ -128,10 +128,11 @@ if st.session_state.omloopplanning and st.session_state.datafile:
 
 
 #De accucapaciteit van de bus is minimaal 10% en word niet meer opgeladen dan 90%
-    df2['stroomgebruik'] = ""   
+df2['stroomgebruik'] = ""   
     leegloopsnelheid = 2.2
     idle_leegloopsnelheid = 0.01
     oplaadsnelheid = 20
+    kosten_opladen = 0.37
     max_capacity_battery = st.session_state.maximumcapaciteit * st.session_state.SOH_waarde
     
     lijn_onder_capaciteit = []
@@ -140,6 +141,7 @@ if st.session_state.omloopplanning and st.session_state.datafile:
     wenscount1 = 0
     st.session_state.totale_tijd = 0
     st.session_state.tijd_materiaalrit = 0
+    st.session_state.totaal_kosten_opladen = 0
 
     start_percentage = []
     for l in range(df2['omloop nummer'].nunique()):
@@ -180,7 +182,8 @@ if st.session_state.omloopplanning and st.session_state.datafile:
                     energie_verbruik = aantal_minuten * oplaadsnelheid
                     start_capaciteit += energie_verbruik
                     st.session_state.totale_tijd += aantal_minuten
-                  
+                    st.session_state.totaal_kosten_opladen += aantal_minuten * oplaadsnelheid * kosten_opladen
+                    
                 if (start_capaciteit < (st.session_state.minimumpercentage*max_capacity_battery))== True:
                     if df2['omloop nummer'][l] not in lijn_onder_capaciteit:
                         lijn_onder_capaciteit.append(df2['omloop nummer'][l])
@@ -191,15 +194,26 @@ if st.session_state.omloopplanning and st.session_state.datafile:
                         wenscount1 += 1
                 df2['stroomgebruik'][m] = start_capaciteit
                 lijst2.append(start_capaciteit/max_capacity_battery*100)
-        st.session_state.test = df2
+        
         start_percentage.append(lijst2)
-    # st.markdown(start_percentage)
+    st.session_state.test = df2
+    st.markdown(start_percentage)
     st.session_state.lijn_boven_capaciteit = lijn_boven_capaciteit
     st.session_state.lijn_onder_capaciteit = lijn_onder_capaciteit
-    # st.header('Eis 3')
-    # st.subheader('Deze omloop ritten komen onder de 10% van de max capaciteit:')
-    # st.markdown(st.session_state.lijn_onder_capaciteit)
+    st.header('Eis 3')
+    st.subheader('Deze omloop ritten komen onder de 10% van de max capaciteit:')
+    st.markdown(st.session_state.lijn_onder_capaciteit)
     st.session_state.counter3 = counter3
+    
+    
+    # st.write(start_percentage)
+    st.session_state.laatste_accucapaciteit = []
+    for i in start_percentage:
+        st.session_state.laatste_accucapaciteit.append(i[-1])
+
+
+    st.session_state.lijn_boven_capaciteit = lijn_boven_capaciteit
+    st.session_state.lijn_onder_capaciteit = lijn_onder_capaciteit
     
     
     # st.write(start_percentage)
