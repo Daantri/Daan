@@ -58,5 +58,3 @@ if pagina_1:
 # if st.session_state.tweede:
 #     df = pd.read_excel(st.session_state.tweede)
 #     st.dataframe(df)
-
-
