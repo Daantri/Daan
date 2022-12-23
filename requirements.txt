@@ -4,7 +4,6 @@ argon2-cffi-bindings
 asttokens
 attrs
 backcall
-base64
 beautifulsoup4
 bleach
 blinker
