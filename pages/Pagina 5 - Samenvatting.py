@@ -58,12 +58,18 @@ data3 = {
                   "Wens 4: Het aantal bussen is minimaal"]}
 data4 = pd.DataFrame(data3)
 data4['Wensovertreding'] = ''
-data4.at[0, 'Wensovertreding'] = f"omloopnummer(s) {st.session_state.lijn_boven_capaciteit}"
-data4.at[1, 'Wensovertreding'] = f"omloopnummer(s) {st.session_state.bussen_die_te_kort_opladen}"
+if len(st.session_state.bussen_die_te_kort_opladen) != 0:
+    data4.at[0, 'Wensovertreding'] = f"omloopnummer(s) {st.session_state.lijn_boven_capaciteit}"
+else:
+    data4.at[0, 'Wensovertreding'] = f"n.v.t."
+if len(st.session_state.bussen_die_te_kort_opladen) != 0:
+    data4.at[1, 'Wensovertreding'] = f"omloopnummer(s) {st.session_state.bussen_die_te_kort_opladen}"
+else:
+    data4.at[1, 'Wensovertreding'] = f"n.v.t."
+#data4.at[0, 'Wensovertreding'] = f"omloopnummer(s) {st.session_state.lijn_boven_capaciteit}"
+#data4.at[1, 'Wensovertreding'] = f"omloopnummer(s) {st.session_state.bussen_die_te_kort_opladen}"
 data4.at[2, 'Wensovertreding'] = f"{st.session_state.wenscount3} aantal materiaalritten"
 data4.at[3, 'Wensovertreding'] = f"{st.session_state.wenscount4} aantal bussen"
-data4.loc[data4['Wensovertreding']=='0' ,'Wensovertreding']="N.v.t."
-data4.loc[data4['Wensovertreding']=='[]' ,'Wensovertreding']="N.v.t."
 
 st.dataframe(data4)
 pagina_6 = st.button("Volgende pagina")
