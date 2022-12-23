@@ -131,7 +131,7 @@ if st.session_state.omloopplanning and st.session_state.datafile:
     df2['stroomgebruik'] = ""   
     leegloopsnelheid = 2.2
     idle_leegloopsnelheid = 0.01
-    oplaadsnelheid = 20
+    oplaadsnelheid = 250
     kosten_opladen = 0.37
     max_capacity_battery = st.session_state.maximumcapaciteit * st.session_state.SOH_waarde
     
@@ -337,6 +337,13 @@ if st.session_state.omloopplanning and st.session_state.datafile:
     st.session_state.counter7 = counter7
     # if counter7 > 0:
     #     st.write('Bus(sen) ', bus_die_te_langzaam_rijdt, 'rijden te langzaam naar een route.')
+    st.subheader('Eis 8' )
+    DFmetBeginOplaadstation = df3[df3.startlocatie == st.session_state.garagenaam]
+    dichtsbijzijnde = DFmetBeginOplaadstation['afstand in meters'].idxmin()
+    dichtsbijzijnde_van_laad_station = DFmetBeginOplaadstation['eindlocatie'][dichtsbijzijnde]
+    dfgefiltered = df2[(df2.startlocatie != dichtsbijzijnde_van_laad_station) & (df2.eindlocatie == st.session_state.garagenaam) & (df2.startlocatie != st.session_state.garagenaam)]
+    st.session_state.busseneis8 = dfgefiltered['omloop nummer'].tolist()
+    counter8 = len(dfgefiltered)
 
 ###### WENSEN
     # st.header('Wens 1')
