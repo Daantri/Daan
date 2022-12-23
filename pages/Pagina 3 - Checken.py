@@ -158,9 +158,11 @@ if st.session_state.omloopplanning and st.session_state.datafile:
               
             if b < e:
                 aantal_minuten = (eindtijd - begintijd)/60/60
+                st.markdown(aantal_minuten)
             elif b > e:
                 eindtijd += 24*60*60
                 aantal_minuten = (eindtijd - begintijd)/60/60
+                st.markdown(aantal_minuten)
             if (df2['omloop nummer'][m]==(l+1))== True:
                 if (df2['activiteit'][m] == 'materiaal rit')== True:
                     energie_verbruik = aantal_minuten * leegloopsnelheid
