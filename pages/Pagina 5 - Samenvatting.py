@@ -54,14 +54,14 @@ data2.loc[data2['Omloop nummer']=='[]' ,'Omloop nummer']="Voldoet"
 st.dataframe(data2)
 data3 = {
         "Wensen": [f"Wens 1: De bussen worden tot maximaal {st.session_state.maximumpercentage*100}% opgeladen per keer",
-                  "Wens 2: De bussen zijn tot de benodigde hoeveelheid capaciteit van een retourrit opgeladen", 
+                  f"Wens 2: De bussen laden minimaal {st.session_state.minimale_oplaadtijd} minuten op", 
                   "Wens 3: De bussen rijden zo min mogelijk materiaalritten", 
                   "Wens 4: Het aantal bussen is minimaal"]}
 data4 = pd.DataFrame(data3)
 data4['Wensovertreding'] = ''
-data4.at[0, 'Wensovertreding'] = st.session_state.wenscount1
-data4.at[1, 'Wensovertreding'] = st.session_state.bussen_die_te_kort_opladen
-data4.at[2, 'Wensovertreding'] = st.session_state.lijn_boven_capaciteit
+data4.at[0, 'Wensovertreding'] = f"omloopnummer(s){st.session_state.lijn_boven_capaciteit}"
+data4.at[1, 'Wensovertreding'] = f"omloopnummer(s){st.session_state.bussen_die_te_kort_opladen}"
+data4.at[2, 'Wensovertreding'] = f"{st.session_state.wenscount3} aantal materiaalritten
 data4.at[3, 'Wensovertreding'] = f"{st.session_state.wenscount4} aantal bussen"
 st.dataframe(data4)
 pagina_6 = st.button("Volgende pagina")
