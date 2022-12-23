@@ -58,6 +58,7 @@ data3 = {
                   "Wens 4: Het aantal bussen is minimaal"]}
 data4 = pd.DataFrame(data3)
 data4['Wensovertreding'] = ''
+
 st.session_state.bussen_die_te_kort_opladen = st.session_state.bussen_die_te_kort_opladen.astype('str')
 st.session_state.lijn_boven_capaciteit = st.session_state.lijn_boven_capaciteit.astype('str')
 if len(st.session_state.bussen_die_te_kort_opladen) != '[]':
