@@ -59,6 +59,7 @@ fig = px.timeline(omloopplanning, x_start="starttijd", x_end="eindtijd", y="omlo
 fig.update_yaxes(autorange="reversed")
 st.plotly_chart(fig)
 #st.dataframe(omloopplanning)
+omloopplanning.loc[omloopplanning['stroomgebruik'] > st.session_state.max_capacity_battery, 'stroomgebruik'] = st.session_state.max_capacity_battery
 st.header('Verloop accucapaciteit (in kWh)')
 fig2 = px.line(omloopplanning, x="starttijd", y="stroomgebruik", color='omloop nummer')
 st.plotly_chart(fig2)
