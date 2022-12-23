@@ -59,7 +59,7 @@ data3 = {
                   "Wens 4: Het aantal bussen is minimaal"]}
 data4 = pd.DataFrame(data3)
 data4['Wensovertreding'] = ''
-data4.at[0, 'Wensovertreding'] = f"omloopnummer(s){st.session_state.lijn_boven_capaciteit}"
+data4.at[0, 'Wensovertreding'] = f"omloopnummer(s){','.join(st.session_state.lijn_boven_capaciteit)}"
 data4.at[1, 'Wensovertreding'] = f"omloopnummer(s){st.session_state.bussen_die_te_kort_opladen}"
 data4.at[2, 'Wensovertreding'] = f"{st.session_state.wenscount3} aantal materiaalritten"
 data4.at[3, 'Wensovertreding'] = f"{st.session_state.wenscount4} aantal bussen"
