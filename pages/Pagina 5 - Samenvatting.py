@@ -49,7 +49,7 @@ a = []
 data2.loc[data2['Omloop nummer']=='0' ,'Omloop nummer']="Voldoet"
 data2.loc[data2['Omloop nummer']=='[]' ,'Omloop nummer']="Voldoet"
 # data2.loc[,'Omloop nummer']="n.v.t."
-if len(st.session_state.lijn_boven_capaciteit)
+# if len(st.session_state.lijn_boven_capaciteit)
 
 st.dataframe(data2)
 data3 = {
