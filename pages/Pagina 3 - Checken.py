@@ -129,7 +129,7 @@ if st.session_state.omloopplanning and st.session_state.datafile:
 
 #De accucapaciteit van de bus is minimaal 10% en word niet meer opgeladen dan 90%
     df2['stroomgebruik'] = ""   
-    leegloopsnelheid = 2.2
+    leegloopsnelheid = 0.9209
     idle_leegloopsnelheid = 0.01
     oplaadsnelheid = 250
     kosten_opladen = 0.37
