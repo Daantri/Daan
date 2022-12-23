@@ -12,7 +12,7 @@ from streamlit_extras.switch_page_button import switch_page
 st.set_page_config(
     page_title= 'Visueel overzicht')
 # col1, col2 = st.columns(2)
-st.write(st.session_state.counter1, st.session_state.counter2, st.session_state.counter3, st.session_state.counter4, st.session_state.counter5, st.session_state.counter6, st.session_state.counter7, st.session_state.counter8)
+#st.write(st.session_state.counter1, st.session_state.counter2, st.session_state.counter3, st.session_state.counter4, st.session_state.counter5, st.session_state.counter6, st.session_state.counter7, st.session_state.counter8)
 opgeteld = st.session_state.counter1 + st.session_state.counter2 + st.session_state.counter3 + st.session_state.counter4 + st.session_state.counter5 + st.session_state.counter6 + st.session_state.counter7 + st.session_state.counter8
 # with col1:
 if opgeteld == 0:
