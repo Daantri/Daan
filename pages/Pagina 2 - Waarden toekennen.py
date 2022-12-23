@@ -32,7 +32,7 @@ with st.form("Waarde toekennen aan wens 2"):
        st.write("opgeslagen")
 
 with st.form("Waarde toekennen aan wens 3"):
-   st.write("Wens 3: De bussen rijden zo min mogelijk materiaalritten")
+   st.write(f"Wens 3: De bussen laden minimaal st.session_state.minimale_oplaadtijd minuten op")
    st.session_state.waarde_wens3 = st.slider("welke weging wilt u toekennen aan deze wens?",min_value=0, max_value=10)
    waarde_wens3 = st.form_submit_button("Bevestig")
    if st.session_state.waarde_wens3:
