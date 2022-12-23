@@ -12,20 +12,23 @@ from streamlit_extras.switch_page_button import switch_page
 st.set_page_config(
     page_title= 'Visueel overzicht')
 # col1, col2 = st.columns(2)
-
+st.write(st.session_state.counter1, st.session_state.counter2, st.session_state.counter3, st.session_state.counter4, st.session_state.counter5, st.session_state.counter6, st.session_state.counter7, st.session_state.counter8)
+opgeteld = st.session_state.counter1 + st.session_state.counter2 + st.session_state.counter3 + st.session_state.counter4 + st.session_state.counter5 + st.session_state.counter6 + st.session_state.counter7 + st.session_state.counter8
 # with col1:
-st.header('Pie chart Eisen')
-labels_eisen = 'Eis 1', 'Eis 2', 'Eis 3','Eis 4','Eis 5','Eis 6','Wens 1','Wens 2','Wens 3', 'Wens 4',
-sizes_eisen = [st.session_state.counter1, 
-               st.session_state.counter2, 
-               st.session_state.counter3, 
-               st.session_state.counter4, 
-               st.session_state.counter5, 
-               st.session_state.counter6, 
-               st.session_state.wenscount1, 
-               st.session_state.wenscount2, 
-               st.session_state.wenscount3, 
-               st.session_state.wenscount4]
+if opgeteld == 0:
+    st.markdown('De planning voldoet aan alle eisen.')
+else:
+    st.markdown('De planning voldoet niet aan alle eisen. In de diagram hieronder is te zien welke eisen de grootste penalty\'s hebben')
+    st.header('Pie chart Eisen')
+    labels_eisen = 'Eis 1', 'Eis 2', 'Eis 3','Eis 4','Eis 5','Eis 6','Eis 7', 'Eis 8',
+    sizes_eisen = [st.session_state.counter1, 
+                   st.session_state.counter2, 
+                   st.session_state.counter3, 
+                   st.session_state.counter4, 
+                   st.session_state.counter5, 
+                   st.session_state.counter6, 
+                   st.session_state.counter7, 
+                   st.session_state.counter8]
 
     
 
@@ -72,5 +75,8 @@ st.write(f'Weging wens 3: {st.session_state.waarde_wens3}')
 st.write(f'Weging wens 4: {st.session_state.waarde_wens4}')
 
 pagina_5 = st.button("Volgende pagina")
+terug_naar_2 = st.button("Terug naar Pagina 2")
 if pagina_5:
     switch_page("Pagina 5 - Samenvatting")
+if terug_naar_2:
+    switch_page("Pagina 2 - Waarden toekennen")
