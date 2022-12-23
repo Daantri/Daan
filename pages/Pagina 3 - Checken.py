@@ -134,7 +134,7 @@ if st.session_state.omloopplanning and st.session_state.datafile:
     oplaadsnelheid = 250
     kosten_opladen = 0.37
     max_capacity_battery = st.session_state.maximumcapaciteit * st.session_state.SOH_waarde
-    
+    st.session_state.max_capacity_battery = max_capacity_battery
     lijn_onder_capaciteit = []
     lijn_boven_capaciteit = []
     counter3 = 0
