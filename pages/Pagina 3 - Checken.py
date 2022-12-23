@@ -129,7 +129,7 @@ if st.session_state.omloopplanning and st.session_state.datafile:
 
 #De accucapaciteit van de bus is minimaal 10% en word niet meer opgeladen dan 90%
     df2['stroomgebruik'] = ""   
-    leegloopsnelheid = 0.9209
+    leegloopsnelheid = 0.9209*60
     idle_leegloopsnelheid = 0.01
     oplaadsnelheid = 250
     kosten_opladen = 0.37
@@ -158,11 +158,9 @@ if st.session_state.omloopplanning and st.session_state.datafile:
               
             if b < e:
                 aantal_minuten = (eindtijd - begintijd)/60/60
-                st.markdown(aantal_minuten)
             elif b > e:
                 eindtijd += 24*60*60
                 aantal_minuten = (eindtijd - begintijd)/60/60
-                st.markdown(aantal_minuten)
             if (df2['omloop nummer'][m]==(l+1))== True:
                 if (df2['activiteit'][m] == 'materiaal rit')== True:
                     energie_verbruik = aantal_minuten * leegloopsnelheid
