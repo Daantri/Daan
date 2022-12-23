@@ -142,7 +142,8 @@ if st.session_state.omloopplanning and st.session_state.datafile:
     st.session_state.totale_tijd = 0
     st.session_state.tijd_materiaalrit = 0
     st.session_state.totaal_kosten_opladen = 0
-
+    df2.fillna('leeg', inplace=True)
+    df3.fillna('leeg', inplace=True)
     start_percentage = []
     for l in range(df2['omloop nummer'].nunique()):
         start_capaciteit = st.session_state.percentage_opgeladen/100*max_capacity_battery #350 is de maximale State of Charge
@@ -163,6 +164,7 @@ if st.session_state.omloopplanning and st.session_state.datafile:
                 aantal_minuten = (eindtijd - begintijd)/60/60
             if (df2['omloop nummer'][m]==(l+1))== True:
                 if (df2['activiteit'][m] == 'materiaal rit')== True:
+                    
                     energie_verbruik = aantal_minuten * leegloopsnelheid
                     start_capaciteit += -energie_verbruik
                     st.session_state.totale_tijd += aantal_minuten
@@ -368,6 +370,7 @@ if st.session_state.omloopplanning and st.session_state.datafile:
             aantal_minuten = int(aantal_minuten)    
         if aantal_minuten < st.session_state.minimale_oplaadtijd:
             wenscount2 += 1
+            bussen_die_te_kort_opladen.append(df2['omloop nummer'][i])
     # st.markdown(wenscount2)
     st.session_state.bussen_die_te_kort_opladen = bussen_die_te_kort_opladen
     st.session_state.wenscount2 = wenscount2
@@ -376,7 +379,6 @@ if st.session_state.omloopplanning and st.session_state.datafile:
 
     # st.header('Wens 3')
     st.session_state.wenscount3 = sum(df2.activiteit == 'materiaal rit')
-    
     # st.header('Wens 4')
     st.session_state.wenscount4 = (df2['omloop nummer'].nunique())
     
