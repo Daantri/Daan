@@ -17,7 +17,7 @@ if st.session_state.omloopplanning and st.session_state.datafile:
     df1 = pd.read_excel(st.session_state.datafile, engine='openpyxl')
     df2 = pd.read_excel(st.session_state.omloopplanning, engine='openpyxl')
     df3 = pd.read_excel(st.session_state.datafile,sheet_name='Afstand matrix') #deze moet aangepast
-    counter_materiaal = df2['activiteit'].value_counts()['dienst rit']
+    counter_dienst = df2['activiteit'].value_counts()['dienst rit']
     col1, col2 = st.columns(2)
     with col1:
         st.subheader('Totaal aantal benodigde bussen:')
@@ -25,14 +25,14 @@ if st.session_state.omloopplanning and st.session_state.datafile:
         st.header(aantal_bussen)
         
         st.subheader('Percentage aantal gemaakte materiaalritten t.a.v. alle gemaakte ritten:')
-        counter_dienst = df2['activiteit'].value_counts()['materiaal rit']
+        counter_materiaal = df2['activiteit'].value_counts()['materiaal rit']
         per_materiaal_rit = (counter_materiaal/(counter_materiaal+counter_dienst))*100
         st.header(f'{int(per_materiaal_rit)}%')
 
 ##########################################################################################
     with col2:
         st.subheader('Totaal aantal gemaakte materiaal ritten:')
-        counter_materiaal = df2['activiteit'].value_counts()['dienst rit']
+        counter_materiaal = df2['activiteit'].value_counts()['materiaal rit']
         st.header(counter_materiaal)
 
         st.subheader('Percentage gemaakte materiaalritten t.a.v. totale tijd:')
@@ -66,7 +66,8 @@ if st.session_state.omloopplanning and st.session_state.datafile:
     terug_aan_net = 0
 
     for i in st.session_state.laatste_accucapaciteit:
-        if i > st.session_state.maximumcapaciteit*st.session_state.percentage_opgeladen:      # de 350 moet vervangen worden door de juiste st.sessions_state..............
+        ii = i/100*max_capacity_battery
+        if ii > max_capacity_battery*st.session_state.percentage_opgeladen:      # de 350 moet vervangen worden door de juiste st.sessions_state..............
             terug_aan_net += ((st.session_state.maximumcapaciteit*st.session_state.percentage_opgeladen) - i) 
     
     if terug_aan_net > 0:
