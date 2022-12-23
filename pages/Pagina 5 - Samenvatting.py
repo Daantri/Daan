@@ -58,11 +58,13 @@ data3 = {
                   "Wens 4: Het aantal bussen is minimaal"]}
 data4 = pd.DataFrame(data3)
 data4['Wensovertreding'] = ''
-if len(st.session_state.bussen_die_te_kort_opladen) != 0:
+st.session_state.bussen_die_te_kort_opladen = st.session_state.bussen_die_te_kort_opladen.astype('str')
+st.session_state.lijn_boven_capaciteit = st.session_state.lijn_boven_capaciteit.astype('str')
+if len(st.session_state.bussen_die_te_kort_opladen) != '[]':
     data4.at[0, 'Wensovertreding'] = f"omloopnummer(s) {st.session_state.lijn_boven_capaciteit}"
 else:
     data4.at[0, 'Wensovertreding'] = f"n.v.t."
-if len(st.session_state.bussen_die_te_kort_opladen) != 0:
+if len(st.session_state.bussen_die_te_kort_opladen) != '[]':
     data4.at[1, 'Wensovertreding'] = f"omloopnummer(s) {st.session_state.bussen_die_te_kort_opladen}"
 else:
     data4.at[1, 'Wensovertreding'] = f"n.v.t."
