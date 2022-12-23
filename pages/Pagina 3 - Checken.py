@@ -185,12 +185,12 @@ if st.session_state.omloopplanning and st.session_state.datafile:
                     st.session_state.totaal_kosten_opladen += aantal_minuten * oplaadsnelheid * kosten_opladen
                     
                 if (start_capaciteit < (st.session_state.minimumpercentage*max_capacity_battery))== True:
-                    if df2['omloop nummer'][l] not in lijn_onder_capaciteit:
-                        lijn_onder_capaciteit.append(df2['omloop nummer'][l])
+                    if df2['omloop nummer'][m] not in lijn_onder_capaciteit:
+                        lijn_onder_capaciteit.append(df2['omloop nummer'][m])
                         counter3 += 1
                 elif (start_capaciteit > (st.session_state.maximumpercentage*max_capacity_battery))== True:
-                    if df2['omloop nummer'][l] not in lijn_boven_capaciteit:
-                        lijn_boven_capaciteit.append(df2['omloop nummer'][l])
+                    if df2['omloop nummer'][m] not in lijn_boven_capaciteit:
+                        lijn_boven_capaciteit.append(df2['omloop nummer'][m])
                         wenscount1 += 1
                 df2['stroomgebruik'][m] = start_capaciteit
                 lijst2.append(start_capaciteit/max_capacity_battery*100)
