@@ -61,7 +61,10 @@ st.plotly_chart(fig)
 #st.dataframe(omloopplanning)
 omloopplanning.loc[omloopplanning['stroomgebruik'] > st.session_state.max_capacity_battery, 'stroomgebruik'] = st.session_state.max_capacity_battery
 st.header('Verloop accucapaciteit (in kWh)')
-fig2 = px.line(omloopplanning, x="starttijd", y="stroomgebruik", color='omloop nummer')
+fig2 = px.line(omloopplanning, x="starttijd", y="stroomgebruik", color='omloop nummer',labels={
+                     "stroomgebruik": "Hoeveelheid in accu (kWh)",
+                     "starttijd": "Tijd"
+                 },)
 st.plotly_chart(fig2)
 
 pagina_7 = st.button("Volgende pagina")
