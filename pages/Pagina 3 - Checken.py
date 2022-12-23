@@ -181,6 +181,8 @@ if st.session_state.omloopplanning and st.session_state.datafile:
                 elif (df2['activiteit'][m] == 'opladen') == True:
                     energie_verbruik = aantal_minuten * oplaadsnelheid
                     start_capaciteit += energie_verbruik
+                    if start_capaciteit > max_capacity_battery:
+                        start_capaciteit = max_capacity_battery
                     st.session_state.totale_tijd += aantal_minuten
                     st.session_state.totaal_kosten_opladen += aantal_minuten * oplaadsnelheid * kosten_opladen
                     
