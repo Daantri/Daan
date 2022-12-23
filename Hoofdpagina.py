@@ -22,6 +22,7 @@ st.set_page_config(
 st.title('Uploaden data')
 st.markdown('Upload de data als het aangegeven format in de handleiding.')
 
+
 col1, col2 = st.columns(2)
 
 
@@ -58,3 +59,11 @@ if pagina_1:
 # if st.session_state.tweede:
 #     df = pd.read_excel(st.session_state.tweede)
 #     st.dataframe(df)
+
+def show_pdf(file_path):
+    with open(file_path,"rb") as f:
+        base64_pdf = base64.b64encode(f.read()).decode('utf-8')
+    pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="800" height="800" type="application/pdf"></iframe>'
+    st.markdown(pdf_display, unsafe_allow_html=True)
+
+show_pdf('Explanation tool.pdf')
