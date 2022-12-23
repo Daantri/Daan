@@ -60,10 +60,13 @@ if pagina_1:
 #     df = pd.read_excel(st.session_state.tweede)
 #     st.dataframe(df)
 
-def show_pdf(file_path):
-    with open(file_path,"rb") as f:
+def displayPDF(file):
+    # Opening file from file path
+    with open(file, "rb") as f:
         base64_pdf = base64.b64encode(f.read()).decode('utf-8')
-    pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="800" height="800" type="application/pdf"></iframe>'
-    st.markdown(pdf_display, unsafe_allow_html=True)
 
-show_pdf('Explanation tool.pdf')
+    # Embedding PDF in HTML
+    pdf_display = F'<iframe src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf"></iframe>'
+
+    # Displaying File
+    st.markdown("Explanation tool", unsafe_allow_html=True)
