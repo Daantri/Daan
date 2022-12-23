@@ -28,7 +28,8 @@ st.title("Samenvatting")
 # st.session_state.wenscount2
 # st.session_state.wenscount3
 # st.session_state.wenscount4
-    
+st.session_state.busseneis8
+st.session_state.counter8 
 #st.checkbox("Use container width", value=False, key="use_container_width")
 data = {"Eisen": ["Eis 1: Bussen die niet rijden op de momenten die vastgelegd zijn",
                   "Eis 2: Bussen beginnen niet waar ze eindigen", 
@@ -36,7 +37,8 @@ data = {"Eisen": ["Eis 1: Bussen die niet rijden op de momenten die vastgelegd z
                   "Eis 4: Bussen die niet op de gekozen locatie opgeladen worden",
                   f"Eis 5: Niet meer dan {st.session_state.tegelijk_opladen} bussen laden tegelijk op",
                   "Eis 6: Bussen rijden niet te snel van locatie naar locatie",
-                  "Eis 7: Bussen rijden niet te langzaam van locatie naar locatie"]}
+                  "Eis 7: Bussen rijden niet te langzaam van locatie naar locatie",
+                 "Eis 8: Bussen rijden alleen van het dichstbijzijnde station naar oplaadstation"]}
 # "Omloop nummer":[st.session_state.counter1,
 #   st.session_state.verkeerde_ritten,
 #   st.session_state.lijn_onder_capaciteit,
@@ -55,6 +57,7 @@ data2.at[3, 'Omloop nummer']= st.session_state.bussendienietopladenoplocatie
 data2.at[4, 'Omloop nummer']= st.session_state.counter6
 data2.at[5, 'Omloop nummer']= st.session_state.bus_die_te_snel_rijdt
 data2.at[6, 'Omloop nummer']= st.session_state.bus_die_te_langzaam_rijdt
+data2.at[7, 'Omloop nummer']= st.session_state.busseneis8
 data2['Omloop nummer']=data2['Omloop nummer'].astype('str')
 a = []
 data2.loc[data2['Omloop nummer']=='0' ,'Omloop nummer']="Voldoet"
