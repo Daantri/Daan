@@ -247,6 +247,24 @@ if st.session_state.omloopplanning and st.session_state.datafile:
     #st.subheader('Deze omloop ritten komen onder de 10% van de max capaciteit:')
     #st.markdown(st.session_state.lijn_onder_capaciteit)
     st.session_state.counter3 = counter3
+        # st.write(start_percentage)
+    st.session_state.laatste_accucapaciteit = []
+    for i in start_percentage:
+        st.session_state.laatste_accucapaciteit.append(i[-1])
+
+
+    st.session_state.lijn_boven_capaciteit = lijn_boven_capaciteit
+    st.session_state.lijn_onder_capaciteit = lijn_onder_capaciteit
+    
+    
+    # st.write(start_percentage)
+    st.session_state.laatste_accucapaciteit = []
+    for i in start_percentage:
+        st.session_state.laatste_accucapaciteit.append(i[-1])
+
+
+    st.session_state.lijn_boven_capaciteit = lijn_boven_capaciteit
+    st.session_state.lijn_onder_capaciteit = lijn_onder_capaciteit
     
 
 
