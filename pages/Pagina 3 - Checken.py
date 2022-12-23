@@ -129,7 +129,7 @@ if st.session_state.omloopplanning and st.session_state.datafile:
 
 #De accucapaciteit van de bus is minimaal 10% en word niet meer opgeladen dan 90%
     df2['stroomgebruik'] = ""   
-    leegloopsnelheid = 0.9209
+    leegloopsnelheid = 2.2
     idle_leegloopsnelheid = 0.01
     oplaadsnelheid = 250
     kosten_opladen = 0.37
@@ -142,8 +142,8 @@ if st.session_state.omloopplanning and st.session_state.datafile:
     st.session_state.totale_tijd = 0
     st.session_state.tijd_materiaalrit = 0
     st.session_state.totaal_kosten_opladen = 0
-    df2.fillna('leeg', inplace=True)
-    df3.fillna('leeg', inplace=True)
+    
+
     start_percentage = []
     for l in range(df2['omloop nummer'].nunique()):
         start_capaciteit = st.session_state.percentage_opgeladen/100*max_capacity_battery #350 is de maximale State of Charge
@@ -164,16 +164,54 @@ if st.session_state.omloopplanning and st.session_state.datafile:
                 aantal_minuten = (eindtijd - begintijd)/60/60
             if (df2['omloop nummer'][m]==(l+1))== True:
                 if (df2['activiteit'][m] == 'materiaal rit')== True:
+
                     
-                    energie_verbruik = aantal_minuten * leegloopsnelheid
-                    start_capaciteit += -energie_verbruik
-                    st.session_state.totale_tijd += aantal_minuten
-                    st.session_state.tijd_materiaalrit += aantal_minuten
-                  
+                    if (df2['startlocatie'][m] =='ehvapt' and df2['eindlocatie'][m] =='ehvbst')== True or (df2['startlocatie'][m] == 'ehvbst' and df2['eindlocatie'][m] =='ehvapt')== True:
+                        energie_verbruik = df3['afstand in meters'][4]/1000* leegloopsnelheid
+                        start_capaciteit += -energie_verbruik
+                        st.session_state.totale_tijd += aantal_minuten
+                        st.session_state.tijd_materiaalrit += aantal_minuten
+                    
+                    
+                    elif (df2['startlocatie'][m] == 'ehvbst' and df2['eindlocatie'][m] =='ehvgar')== True or (df2['startlocatie'][m] == 'ehvgar' and df2['eindlocatie'][m] == 'ehvbst') == True:
+                        energie_verbruik = df3['afstand in meters'][6]/1000* leegloopsnelheid
+                        start_capaciteit += -energie_verbruik
+                        st.session_state.totale_tijd += aantal_minuten
+                        st.session_state.tijd_materiaalrit += aantal_minuten
+                    
+                    elif (df2['startlocatie'][m] == 'ehvapt' and df2['eindlocatie'][m] =='ehvgar')== True or (df2['startlocatie'][m] == 'ehvgar' and df2['eindlocatie'][m] =='ehvapt') == True:
+                        energie_verbruik = df3['afstand in meters'][8]/1000* leegloopsnelheid
+                        start_capaciteit += -energie_verbruik
+                        st.session_state.totale_tijd += aantal_minuten
+                        st.session_state.tijd_materiaalrit += aantal_minuten
+
+
                 elif (df2['activiteit'][m] == 'dienst rit')== True:
-                    energie_verbruik = aantal_minuten * leegloopsnelheid
-                    start_capaciteit += -energie_verbruik
-                    st.session_state.totale_tijd += aantal_minuten
+
+                    if (df2['startlocatie'][m] == 'ehvapt' and df2['eindlocatie'][m] == 'ehvbst') == True:
+                    
+                        if (df2['omloop nummer'][m] == '400'):
+                            energie_verbruik = df3['afstand in meters'][0]/1000* leegloopsnelheid
+                            start_capaciteit += -energie_verbruik
+                            st.session_state.totale_tijd += aantal_minuten
+                            
+                        elif (df2['omloop nummer'][m] == '401'):
+                            energie_verbruik = df3['afstand in meters'][2]/1000* leegloopsnelheid
+                            start_capaciteit += -energie_verbruik
+                            st.session_state.totale_tijd += aantal_minuten
+                            
+                    elif (df2['startlocatie'][m] == 'ehvbst' and df2['eindlocatie'][m] == 'ehvapt') == True:
+                    
+                        if (df2['omloop nummer'][m] == '400'):
+                            energie_verbruik = df3['afstand in meters'][1]/1000* leegloopsnelheid
+                            start_capaciteit += -energie_verbruik
+                            st.session_state.totale_tijd += aantal_minuten
+                            
+                        elif (df2['omloop nummer'][m] == '401'):
+                            energie_verbruik = df3['afstand in meters'][3]/1000* leegloopsnelheid
+                            start_capaciteit += -energie_verbruik
+                            st.session_state.totale_tijd += aantal_minuten
+
                   
                 elif (df2['activiteit'][m] == 'idle') == True:
                     energie_verbruik = aantal_minuten * idle_leegloopsnelheid
@@ -183,6 +221,7 @@ if st.session_state.omloopplanning and st.session_state.datafile:
                 elif (df2['activiteit'][m] == 'opladen') == True:
                     energie_verbruik = aantal_minuten * oplaadsnelheid
                     start_capaciteit += energie_verbruik
+                    
                     if start_capaciteit > max_capacity_battery:
                         start_capaciteit = max_capacity_battery
                     st.session_state.totale_tijd += aantal_minuten
@@ -208,26 +247,6 @@ if st.session_state.omloopplanning and st.session_state.datafile:
     #st.subheader('Deze omloop ritten komen onder de 10% van de max capaciteit:')
     #st.markdown(st.session_state.lijn_onder_capaciteit)
     st.session_state.counter3 = counter3
-    
-    
-    # st.write(start_percentage)
-    st.session_state.laatste_accucapaciteit = []
-    for i in start_percentage:
-        st.session_state.laatste_accucapaciteit.append(i[-1])
-
-
-    st.session_state.lijn_boven_capaciteit = lijn_boven_capaciteit
-    st.session_state.lijn_onder_capaciteit = lijn_onder_capaciteit
-    
-    
-    # st.write(start_percentage)
-    st.session_state.laatste_accucapaciteit = []
-    for i in start_percentage:
-        st.session_state.laatste_accucapaciteit.append(i[-1])
-
-
-    st.session_state.lijn_boven_capaciteit = lijn_boven_capaciteit
-    st.session_state.lijn_onder_capaciteit = lijn_onder_capaciteit
     
 
 
