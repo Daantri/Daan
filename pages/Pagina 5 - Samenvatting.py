@@ -59,16 +59,8 @@ data3 = {
 data4 = pd.DataFrame(data3)
 data4['Wensovertreding'] = ''
 
-if len(st.session_state.bussen_die_te_kort_opladen) != a:
-    data4.at[0, 'Wensovertreding'] = f"omloopnummer(s) {st.session_state.lijn_boven_capaciteit}"
-else:
-    data4.at[0, 'Wensovertreding'] = f"n.v.t."
-if len(st.session_state.bussen_die_te_kort_opladen) != a:
-    data4.at[1, 'Wensovertreding'] = f"omloopnummer(s) {st.session_state.bussen_die_te_kort_opladen}"
-else:
-    data4.at[1, 'Wensovertreding'] = f"n.v.t."
-#data4.at[0, 'Wensovertreding'] = f"omloopnummer(s) {st.session_state.lijn_boven_capaciteit}"
-#data4.at[1, 'Wensovertreding'] = f"omloopnummer(s) {st.session_state.bussen_die_te_kort_opladen}"
+data4.at[0, 'Wensovertreding'] = f"omloopnummer(s) {st.session_state.lijn_boven_capaciteit}"
+data4.at[1, 'Wensovertreding'] = f"omloopnummer(s) {st.session_state.bussen_die_te_kort_opladen}"
 data4.at[2, 'Wensovertreding'] = f"{st.session_state.wenscount3} aantal materiaalritten"
 data4.at[3, 'Wensovertreding'] = f"{st.session_state.wenscount4} aantal bussen"
 
