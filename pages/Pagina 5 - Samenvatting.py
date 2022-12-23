@@ -63,7 +63,7 @@ data4.at[0, 'Wensovertreding'] = st.session_state.wenscount1
 data4.at[1, 'Wensovertreding'] = st.session_state.bussen_die_te_kort_opladen
 data4.at[2, 'Wensovertreding'] = st.session_state.lijn_boven_capaciteit
 data4.at[3, 'Wensovertreding'] = f"{st.session_state.wenscount4} aantal bussen"
-                        
+st.dataframe(data4)
 pagina_6 = st.button("Volgende pagina")
 if pagina_6:
     switch_page("Pagina 6 - Gantt-diagram en lijngrafiek") 
