@@ -44,7 +44,7 @@ if st.session_state.omloopplanning and st.session_state.datafile:
 
 #########################################################################################
     with col1: 
-        oplaadsnelheid = 20
+        oplaadsnelheid = 250
         kosten_opladen = 0.37
         max_capacity_battery = st.session_state.maximumcapaciteit * st.session_state.SOH_waarde
     
