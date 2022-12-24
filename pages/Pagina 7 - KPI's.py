@@ -49,7 +49,6 @@ if st.session_state.omloopplanning and st.session_state.datafile:
         max_capacity_battery = st.session_state.maximumcapaciteit * st.session_state.SOH_waarde
     
         kosten_bijladen = 0  # NIEUW
-        st.markdown(max_capacity_battery)
         for i in st.session_state.laatste_accucapaciteit:
             ii = i/100*max_capacity_battery
             if ii < max_capacity_battery*(st.session_state.percentage_opgeladen/100):
