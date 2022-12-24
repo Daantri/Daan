@@ -43,16 +43,16 @@ if st.session_state.omloopplanning and st.session_state.datafile:
 
 
 #########################################################################################
-    with col1: 
+with col1: 
         oplaadsnelheid = 250
         kosten_opladen = 0.37
         max_capacity_battery = st.session_state.maximumcapaciteit * st.session_state.SOH_waarde
     
         kosten_bijladen = 0  # NIEUW
-
+        st.markdown(max_capacity_battery)
         for i in st.session_state.laatste_accucapaciteit:
             ii = i/100*max_capacity_battery
-            if ii < max_capacity_battery:
+            if ii < max_capacity_battery*(st.session_state.percentage_opgeladen/100):
                 kosten_bijladen += (max_capacity_battery - ii)/oplaadsnelheid * kosten_opladen
         st.subheader('kosten voor het opladen in de gemaakte planning:')
         st.subheader(f'€{int(st.session_state.totaal_kosten_opladen)}')
@@ -63,13 +63,14 @@ if st.session_state.omloopplanning and st.session_state.datafile:
         
         
 ##################################################################################
-    terug_aan_net = 0
+    with col1: 
+        terug_aan_net = 0
 
-    for i in st.session_state.laatste_accucapaciteit:
-        ii = i/100*max_capacity_battery
-        if ii > max_capacity_battery*st.session_state.percentage_opgeladen:      # de 350 moet vervangen worden door de juiste st.sessions_state..............
-            terug_aan_net += ((st.session_state.maximumcapaciteit*st.session_state.percentage_opgeladen) - i) 
-    
-    if terug_aan_net > 0:
-        st.subheader('Hoeveel Kwh kan er aan het einde van de dag worden terug gegeven aan het net:')
-        st.header(f'{terug_aan_net} kWh')
+        for i in st.session_state.laatste_accucapaciteit:
+            ii = i/100*max_capacity_battery
+            if ii > max_capacity_battery*(st.session_state.percentage_opgeladen/100):      # de 350 moet vervangen worden door de juiste st.sessions_state..............
+                terug_aan_net += abs(((max_capacity_battery*st.session_state.percentage_opgeladen/100) - ii))
+
+        if terug_aan_net > 0:
+            st.subheader('Hoeveel Kwh kan er aan het einde van de dag worden terug gegeven aan het net:')
+            st.header(f'{int(terug_aan_net)} kWh')
