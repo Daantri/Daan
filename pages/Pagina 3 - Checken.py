@@ -204,13 +204,13 @@ if st.session_state.omloopplanning and st.session_state.datafile:
                     if (df2['startlocatie'][m] == 'ehvapt' and df2['eindlocatie'][m] == 'ehvbst') == True:
                         st.markdown(df2['omloop nummer'][m])
                         
-                        if (str(df2['omloop nummer'][m])== '400'):
+                        if (str(df2['buslijn'][m])== '400'):
                             energie_verbruik = df3['afstand in meters'][0]/1000* leegloopsnelheid
                             start_capaciteit += -energie_verbruik
                             st.session_state.totale_tijd += aantal_minuten
                             st.markdown('dienstrit 1')
                             
-                        elif (str(df2['omloop nummer'][m]) == '401'):
+                        elif (str(df2['buslijn'][m]) == '401'):
                             energie_verbruik = df3['afstand in meters'][2]/1000* leegloopsnelheid
                             start_capaciteit += -energie_verbruik
                             st.session_state.totale_tijd += aantal_minuten
@@ -219,13 +219,13 @@ if st.session_state.omloopplanning and st.session_state.datafile:
                     elif (df2['startlocatie'][m] == 'ehvbst' and df2['eindlocatie'][m] == 'ehvapt') == True:
                         
                         
-                        if (str(df2['omloop nummer'][m]) == '400'):
+                        if (str(df2['buslijn'][m]) == '400'):
                             energie_verbruik = df3['afstand in meters'][1]/1000* leegloopsnelheid
                             start_capaciteit += -energie_verbruik
                             st.session_state.totale_tijd += aantal_minuten
                             st.markdown('dienstrit 3')
                             
-                        elif (str(df2['omloop nummer'][m]) == '401'):
+                        elif (str(df2['buslijn'][m]) == '401'):
                             energie_verbruik = df3['afstand in meters'][3]/1000* leegloopsnelheid
                             start_capaciteit += -energie_verbruik
                             st.session_state.totale_tijd += aantal_minuten
