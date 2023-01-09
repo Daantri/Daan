@@ -202,7 +202,7 @@ if st.session_state.omloopplanning and st.session_state.datafile:
                     
                     
                     if (df2['startlocatie'][m] == 'ehvapt' and df2['eindlocatie'][m] == 'ehvbst') == True:
-                        st.markdown(df2['omloop nummer'][m])
+                        st.markdown(df2['buslijn'][m])
                         
                         if (str(df2['buslijn'][m])== '400'):
                             energie_verbruik = df3['afstand in meters'][0]/1000* leegloopsnelheid
