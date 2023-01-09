@@ -171,20 +171,27 @@ if st.session_state.omloopplanning and st.session_state.datafile:
                         start_capaciteit += -energie_verbruik
                         st.session_state.totale_tijd += aantal_minuten
                         st.session_state.tijd_materiaalrit += aantal_minuten
-                    
+                        
+                        
+                        st.markdown('eerste materiaal')
+                        
                     
                     elif (df2['startlocatie'][m] == 'ehvbst' and df2['eindlocatie'][m] =='ehvgar')== True or (df2['startlocatie'][m] == 'ehvgar' and df2['eindlocatie'][m] == 'ehvbst') == True:
                         energie_verbruik = df3['afstand in meters'][6]/1000* leegloopsnelheid
                         start_capaciteit += -energie_verbruik
                         st.session_state.totale_tijd += aantal_minuten
                         st.session_state.tijd_materiaalrit += aantal_minuten
+                        
+                        st.markdown('tweede materiaal')
                     
                     elif (df2['startlocatie'][m] == 'ehvapt' and df2['eindlocatie'][m] =='ehvgar')== True or (df2['startlocatie'][m] == 'ehvgar' and df2['eindlocatie'][m] =='ehvapt') == True:
                         energie_verbruik = df3['afstand in meters'][8]/1000* leegloopsnelheid
                         start_capaciteit += -energie_verbruik
                         st.session_state.totale_tijd += aantal_minuten
                         st.session_state.tijd_materiaalrit += aantal_minuten
-
+                        
+                        st.markdown('derde materiaal')
+                        
 
                 elif (df2['activiteit'][m] == 'dienst rit')== True:
 
