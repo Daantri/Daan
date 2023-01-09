@@ -194,34 +194,37 @@ if st.session_state.omloopplanning and st.session_state.datafile:
                         
 
                 elif (df2['activiteit'][m] == 'dienst rit')== True:
-                    st.markdown('dienstrit 1')
+                    
                     
                     if (df2['startlocatie'][m] == 'ehvapt' and df2['eindlocatie'][m] == 'ehvbst') == True:
-                        st.markdown('dienstrit 2')
+                       
                         
                         if (df2['omloop nummer'][m] == '400'):
                             energie_verbruik = df3['afstand in meters'][0]/1000* leegloopsnelheid
                             start_capaciteit += -energie_verbruik
                             st.session_state.totale_tijd += aantal_minuten
+                            st.markdown('dienstrit 1')
                             
                         elif (df2['omloop nummer'][m] == '401'):
                             energie_verbruik = df3['afstand in meters'][2]/1000* leegloopsnelheid
                             start_capaciteit += -energie_verbruik
                             st.session_state.totale_tijd += aantal_minuten
+                            st.markdown('dienstrit 2')
                             
                     elif (df2['startlocatie'][m] == 'ehvbst' and df2['eindlocatie'][m] == 'ehvapt') == True:
-                        st.markdown('dienstrit 3')
+                        
                         
                         if (df2['omloop nummer'][m] == '400'):
                             energie_verbruik = df3['afstand in meters'][1]/1000* leegloopsnelheid
                             start_capaciteit += -energie_verbruik
                             st.session_state.totale_tijd += aantal_minuten
+                            st.markdown('dienstrit 3')
                             
                         elif (df2['omloop nummer'][m] == '401'):
                             energie_verbruik = df3['afstand in meters'][3]/1000* leegloopsnelheid
                             start_capaciteit += -energie_verbruik
                             st.session_state.totale_tijd += aantal_minuten
-
+                            st.markdown('dienstrit 4')
                   
                 elif (df2['activiteit'][m] == 'idle') == True:
                     energie_verbruik = aantal_minuten * idle_leegloopsnelheid
