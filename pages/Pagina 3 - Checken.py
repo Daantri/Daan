@@ -21,11 +21,12 @@ if st.session_state.omloopplanning and st.session_state.datafile:
     df1 = pd.read_excel(st.session_state.datafile, engine='openpyxl')
     df2 = pd.read_excel(st.session_state.omloopplanning, engine='openpyxl')
     df3 = pd.read_excel(st.session_state.datafile,sheet_name='Afstand matrix') #deze moet aangepast
-st.markdown(df2['omloop nummer'][1])
-st.markdown(df2['omloop nummer'][2])
-st.markdown(df2['omloop nummer'][3])
-st.markdown(df2['omloop nummer'][4])
-st.markdown(df2['omloop nummer'][5])
+    st.markdown(df2['omloop nummer'][1])
+    st.markdown(df2['omloop nummer'][2])
+    st.markdown(df2['omloop nummer'][3])
+    st.markdown(df2['omloop nummer'][4])
+    st.markdown(df2['omloop nummer'][5])
+    st.markdown('h')
 #Er moet een bus rijden op de momenten die vastgelegd zijn in de dienstregeling
     # st.header('Eis 1' )
     # st.subheader('Er moet een bus rijden op de momenten die vastgelegd zijn in de dienstregeling')
