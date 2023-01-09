@@ -173,7 +173,6 @@ if st.session_state.omloopplanning and st.session_state.datafile:
                         st.session_state.tijd_materiaalrit += aantal_minuten
                         
                         
-                        st.markdown('eerste materiaal')
                         
                     
                     elif (df2['startlocatie'][m] == 'ehvbst' and df2['eindlocatie'][m] =='ehvgar')== True or (df2['startlocatie'][m] == 'ehvgar' and df2['eindlocatie'][m] == 'ehvbst') == True:
@@ -182,16 +181,12 @@ if st.session_state.omloopplanning and st.session_state.datafile:
                         st.session_state.totale_tijd += aantal_minuten
                         st.session_state.tijd_materiaalrit += aantal_minuten
                         
-                        st.markdown('tweede materiaal')
                     
                     elif (df2['startlocatie'][m] == 'ehvapt' and df2['eindlocatie'][m] =='ehvgar')== True or (df2['startlocatie'][m] == 'ehvgar' and df2['eindlocatie'][m] =='ehvapt') == True:
                         energie_verbruik = df3['afstand in meters'][8]/1000* leegloopsnelheid
                         start_capaciteit += -energie_verbruik
                         st.session_state.totale_tijd += aantal_minuten
-                        st.session_state.tijd_materiaalrit += aantal_minuten
-                        
-                        st.markdown('derde materiaal')
-                        
+                        st.session_state.tijd_materiaalrit += aantal_minuten        
 
                 elif (df2['activiteit'][m] == 'dienst rit')== True:
                     
@@ -202,14 +197,12 @@ if st.session_state.omloopplanning and st.session_state.datafile:
                         if (int(df2['buslijn'][m])== 400):
                             energie_verbruik = df3['afstand in meters'][0]/1000* leegloopsnelheid
                             start_capaciteit += -energie_verbruik
-                            st.session_state.totale_tijd += aantal_minuten
-                            st.markdown('dienstrit 1')
-                            
+                            st.session_state.totale_tijd += aantal_minuten             
+              
                         elif (int(df2['buslijn'][m]) == 401):
                             energie_verbruik = df3['afstand in meters'][2]/1000* leegloopsnelheid
                             start_capaciteit += -energie_verbruik
                             st.session_state.totale_tijd += aantal_minuten
-                            st.markdown('dienstrit 2')
                             
                     elif (df2['startlocatie'][m] == 'ehvbst' and df2['eindlocatie'][m] == 'ehvapt') == True:
                         
@@ -218,13 +211,11 @@ if st.session_state.omloopplanning and st.session_state.datafile:
                             energie_verbruik = df3['afstand in meters'][1]/1000* leegloopsnelheid
                             start_capaciteit += -energie_verbruik
                             st.session_state.totale_tijd += aantal_minuten
-                            st.markdown('dienstrit 3')
                             
                         elif (int(df2['buslijn'][m]) == 401):
                             energie_verbruik = df3['afstand in meters'][3]/1000* leegloopsnelheid
                             start_capaciteit += -energie_verbruik
                             st.session_state.totale_tijd += aantal_minuten
-                            st.markdown('dienstrit 4')
                   
                 elif (df2['activiteit'][m] == 'idle') == True:
                     energie_verbruik = aantal_minuten * idle_leegloopsnelheid
